@@ -1,0 +1,459 @@
+Question 3:section A
+---------------------------------------------------------------------------
+class:MemberType
+---------------------------------------------------------------------------
+package javapractical;
+import java.util.*;
+public class MemberType {
+    
+    int age;
+    String name;
+    int memberType;
+    String memberTypes;
+    static int countCrew,countAdult,countChild;
+    int fee;
+    
+    Scanner scan = new Scanner(System.in);
+    
+    public MemberType() 
+    {
+        System.out.println("Enter Your Age");
+        this.age=scan.nextInt();
+        System.out.println("Enter Your Name");
+        this.name=scan.next();
+        
+        if(age>10) {
+        
+            System.out.println("Type 1 for Crew Member or 2 for Adults");
+        
+            this.memberType=scan.nextInt();
+        
+    if(memberType==1) 
+        {
+            this.memberTypes="Crew";
+            countCrew++;
+            fee=0;
+        }
+        else if(memberType==2) 
+        {
+            this.memberTypes="Adult";
+            countAdult++;
+            fee=500;
+        }
+        }
+                else if(age<10)
+        {
+            this.memberTypes="Children";
+            countChild++;
+            fee=250;
+        }
+        }
+     public static String countMembers() {
+        
+        return "Number of Crew Members: "+countCrew+"\nNumber of Adults: "+countAdult+"\nNumber of Children: "+countChild;
+    }   
+}
+------------------------
+class:CruiseClass  
+-----------------------
+
+package javapractical;
+import java.util.*;
+public class CruiseClass  {
+    public static void main(String[] args) 
+    {
+    MemberType ob;    	
+    	Scanner sc = new Scanner(System.in);
+        
+        Map<Integer,MemberType> mapValue = new HashMap<Integer,MemberType>();
+        
+        System.out.println("Enter the Number of Travelers You want On the Cruise");
+        
+        
+        int num = sc.nextInt();
+        
+        for(int i=1; i<=num; i++) 
+        {
+            mapValue.put(i, new MemberType());
+        }
+        
+        //System.out.println("The Values are: "+mapValue.toString());
+        
+        for(Map.Entry<Integer, MemberType> entry:mapValue.entrySet()){    
+            int key=entry.getKey();  
+            MemberType b=entry.getValue();  
+            System.out.println(key+" Data:");  
+            System.out.println("Name: " + b.name + "\nAge: " + b.age + "\nMember Type: " + b.memberTypes+"\nFees: "+b.fee);    
+            } 
+        
+       System.out.println(MemberType.countMembers());
+        
+    }
+}
+---------------------------------------------------------------------
+output:
+---------------------------------------------------------------------
+Enter the Number of Travelers You want On the Cruise
+3
+Enter Your Age
+12
+Enter Your Name
+as
+Type 1 for Crew Member or 2 for Adults
+1
+Enter Your Age
+12
+Enter Your Name
+sd
+Type 1 for Crew Member or 2 for Adults
+2
+Enter Your Age
+13
+Enter Your Name
+asd
+Type 1 for Crew Member or 2 for Adults
+1
+1 Data:
+Name: as
+Age: 12
+Member Type: Crew
+Fees: 0
+2 Data:
+Name: sd
+Age: 12
+Member Type: Adult
+Fees: 500
+3 Data:
+Name: asd
+Age: 13
+Member Type: Crew
+Fees: 0
+Number of Crew Members: 2
+Number of Adults: 1
+Number of Children: 0
+---------------------------------------------------------------------------------------
+Question 3:section B
+----------------------------------------------------------------------------------------
+----------------------------------------------------
+class:PasteClass
+------------------------------------------------
+package javapractical;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import threaddemo.PasteType;
+
+
+public class PasteClass {
+	public static void main(String[] args) 
+	{	
+		Scanner sc = new Scanner(System.in);
+
+		Map<Integer,PasteType> mapValue = new HashMap<Integer,PasteType>();
+
+		System.out.println("Enter the Number of users");
+
+
+		int num = sc.nextInt();
+
+		for(int i=1; i<=num; i++) 
+		{
+			mapValue.put(i, new PasteType());
+		}
+
+		//System.out.println("The Values are: "+mapValue.toString());
+
+		for(Map.Entry<Integer, PasteType> entry:mapValue.entrySet()){    
+			int key=entry.getKey();  
+			PasteType b=entry.getValue();  
+			System.out.println(key+" Data:");  
+			System.out.println("Name: " + "\nMember Type: " + b.memberTypes);    
+		} 
+
+		System.out.println(PasteType.countMembers());
+
+	}
+}
+
+
+------------------------------------------------------------------------------------------------------
+output:
+------------------------------------------------------------------------------------------------------
+Enter the Number of users
+3
+Enter Your Name
+xcv
+Type 1 for colgate ,2 for pepsodent,3 patanjali
+1
+Enter Your Name
+cvxbn
+Type 1 for colgate ,2 for pepsodent,3 patanjali
+2
+Enter Your Name
+bnm
+Type 1 for colgate ,2 for pepsodent,3 patanjali
+1
+1 Data:
+Name: 
+Member Type: colgate
+2 Data:
+Name: 
+Member Type: pepsodent
+3 Data:
+Name: 
+Member Type: colgate
+Number of colgate users: 2
+Number of pepsodent: 1
+Number of patanjali users:0
+ Number of dabarred users:0
+maximum used brand is:
+Colgate
+
+----------------------------------------------------------------------------------------------------
+Question-2
+----------------------------------------------------------------------------------------------------
+----------------------------
+class: RegularMember 
+---------------------------
+package javapractical;
+import java.util.*;
+
+public class RegularMember {
+	int Enrollment_fee=0;
+	int MemberShip_fee=0;
+	int Golf_services=20000;
+	double amount;
+	public double CalculateBill(int noOfmonths) {
+		
+		
+	 amount= (Golf_services*noOfmonths)+Enrollment_fee+MemberShip_fee;
+	 return amount;
+		
+	}
+	}
+----------------------
+class:GoldMember
+----------------------
+package javapractical;
+
+import java.util.Scanner;
+
+public class GoldMember extends RegularMember{
+	int Enrollment_fee=10000;
+	int MemberShip_fee=90000;
+	int Golf_services=20000;
+	double amount;
+	public double CalculateBill2(int noOfmonths) {
+		if(noOfmonths<6) {
+			amount=Enrollment_fee+MemberShip_fee;
+			
+			return amount;
+			
+		}
+		else
+			noOfmonths=noOfmonths-6;
+			amount=((Golf_services*noOfmonths)+Enrollment_fee+MemberShip_fee);
+		return amount;
+		
+	}
+	public static void main(String[] args) {
+		GoldMember obj=new GoldMember();
+		System.out.println("Enter your choice to select membership");
+		System.out.println("Enter 1 for regularmemberShip");
+		System.out.println("Enter 2 for goldmemberShip");
+		Scanner ob=new Scanner(System.in);
+		int choice=ob.nextInt();
+		double a;
+		switch(choice) {
+		case 1:a=obj.CalculateBill(2);
+		System.out.println(a);
+		break;
+		case 2:a=obj.CalculateBill2(8);
+		System.out.println(a);
+		break;
+		default:System.out.println("enter the correct input");
+		break;
+		
+		}
+		
+		
+	}
+
+	
+
+}
+------------------
+class:SilverMember
+------------------
+package javapractical;
+
+import java.util.Scanner;
+
+public class SilverMember extends RegularMember{
+	int Enrollment_fee=15000;
+	int MemberShip_fee=5000;
+	int Golf_services=20000;
+	double amount;
+	public double CalculateBill1(int noOfmonths) 
+	{
+		if(noOfmonths<6)
+		{
+			amount=Enrollment_fee+MemberShip_fee;
+			return amount;
+
+		}
+		else
+			noOfmonths=noOfmonths-6;
+		amount=((Golf_services*noOfmonths)+Enrollment_fee+MemberShip_fee);
+		return amount;
+
+	}
+	public static void main(String[] args) {
+		SilverMember obj=new SilverMember();
+		System.out.println("Enter your choice to select membership");
+		System.out.println("Enter 1 for regularmemberShip");
+		System.out.println("Enter 2 for silver membership");
+		Scanner ob=new Scanner(System.in);
+		double a;
+		int choice=ob.nextInt();
+		switch(choice) {
+
+		case 1:a=obj.CalculateBill(2);
+		System.out.println(a);
+		break;
+		case 2:a=obj.CalculateBill1(8);
+		System.out.println(a);
+		break;
+		default:System.out.println("enter the correct input");
+		break;
+
+
+
+		}
+	
+	
+	
+}
+
+
+	}
+------------------------------------------------------------------------------------------------------------
+output:1
+Enter your choice to select membership
+Enter 1 for regularmemberShip
+Enter 2 for silver membership
+2
+60000.0
+output:2
+Enter your choice to select membership
+Enter 1 for regularmemberShip
+Enter 2 for goldmemberShip
+1
+40000.0
+----------------------------------------------------------------------------------------------------------
+Question:1
+--------------------------------------------------------------------------------------------------------------
+--------------------------------------------
+class:ProductLoader
+--------------------------------------------
+package javapractical;
+import java.io.*;
+import java.util.*;
+
+class ProductLoader{
+    private static List<Product> lt = new ArrayList<>();
+    
+    public static void loadProduct() throws Exception {
+        
+        BufferedReader bf = new BufferedReader(new FileReader(new File("C:\\Users\\Shwetha.k\\eclipse-workspace\\first\\src\\Product.txt")));
+        
+        String line;
+        while((line=bf.readLine())!=null)
+        {
+            String arr[] = line.split(",");
+            Product pp = new Product(arr[0],arr[1],Double.parseDouble(arr[2]),Integer.parseInt(arr[3]));
+           lt.add(pp);
+        }
+    }
+    public static List<Product> getProductList(){
+        return lt;
+    }
+    
+    public static Product searchProduct(String productID)
+    {
+        List <Product> temp_lt = getProductList();
+        for(Product p : temp_lt)
+        {
+            if(p.productID.equals(productID) )
+            {
+                return p;
+            }
+        }
+        return null; 
+    }
+}
+---------------------------------------------------
+class:Product
+---------------------------------------------------
+package javapractical;
+import java.util.*;
+import java.io.*;
+public class Product {
+
+	    String productID ;
+	    String productName;
+	    double price;
+	    int quantity;
+	    
+	   public Product(String productID, String productName, double price, int quantity) {
+	        super();
+	        this.productID = productID;
+	        this.productName = productName;
+	        this.price = price;
+	        this.quantity = quantity;
+	    }
+
+	   public String getProductID() {
+	        return productID;
+	    }
+
+	   public String getProductName() {
+	        return productName;
+	    }
+
+	    public double getPrice() {
+	        return price;
+	    }
+
+	   public int getQuantity() {
+	        return quantity;
+	    }
+
+	   @Override
+	    public String toString() {
+	        return "Product \nproductID : " + productID + ",\nproductName : " + productName + ",\nprice : " + price + ", \nquantity : "
+	                + quantity;
+	    }
+	   public static void main(String[] args) throws Exception{
+	        
+	        ProductLoader pp = new ProductLoader();
+	        
+	        pp.loadProduct();
+	        System.out.println(pp.searchProduct("P102"));
+	   }
+	    
+	}
+
+----------------------------------
+product.txt
+----------------------------------
+P101,SIM-CARD,100,500
+P102,DATA-CABLE,200,300
+---------------------------------
+Output:
+---------------------------------
+Product 
+productID : P102,
+productName : DATA-CABLE,
+price : 200.0, 
+quantity : 300
